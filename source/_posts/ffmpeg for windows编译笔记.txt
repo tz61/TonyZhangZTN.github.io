@@ -1,0 +1,146 @@
+WSL上 编译ffmpeg 4.4 for android
+用ndk r21e clang编译无问题，但是运行时出现：
+2022-02-14 10:53:47.398 26933-26933/com.tzztn.ffmpegdemo E/AndroidRuntime: FATAL EXCEPTION: main
+    Process: com.tzztn.ffmpegdemo, PID: 26933
+    java.lang.UnsatisfiedLinkError: dlopen failed: cannot locate symbol "__floatunsitf" referenced by "/data/app/~~rxIVrYdwQfvzfrPQgk-rNQ==/com.tzztn.ffmpegdemo-_KMsVHfwYjw-gEGSKKA-sQ==/lib/arm64/libavutil.so"...
+用ndk r17c gnu 编译无问题，但是运行时出现：
+2022-02-14 10:55:27.856 27319-27319/com.tzztn.ffmpegdemo E/AndroidRuntime: FATAL EXCEPTION: main
+    Process: com.tzztn.ffmpegdemo, PID: 27319
+    java.lang.UnsatisfiedLinkError: dlopen failed: cannot locate symbol "__paritydi2" referenced by "/data/app/~~8WNERmKNToktGfjoMK8_6g==/com.tzztn.ffmpegdemo-2D-4kyUQ2yVtAsYKMD3_lg==/lib/arm64/libavcodec.so"...
+
+貌似缺少一个库，但是找不到相关信息
+猜想是libstdc++.so 和libc++_shared.so编译关系
+
+#在windows上编译，但由于ffmpeg编译脚本没有考虑Windows上的交叉编译工具链ld的参数所以不能用
+
+
+后记：
+不是用了clang 就是默认用libc++.so
+
+使用ffmpeg3.3.9 NDK r13b(NDK路径下面没有sysroot，在platform的架构文件夹里)
+这是https://www.jianshu.com/p/ca7ffd2e5e68的一个buildscript，看它里面并没有ADDI_LDFLAGS，所以链接的时候库应该是从--extra-ldflags和--sysroot下的/usr/lib里找的，但没有ADDI_LDFLAGS和SYSROOT，./configure时会因为没有库而让编译器报错而提示
+home/ztn/android-ndk-r13b/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-gcc is u
+nable to create an executable file.
+C compiler test failed.
+因为在configure使用了一个简单的程序来测试能否通过编译（没有任何输出）
+if test "$?" != 0; then
+    echo "$cc is unable to create an executable file."
+    if test -z "$cross_prefix" && ! enabled cross_compile ; then
+        echo "If $cc is a cross-compiler, use the --enable-cross-compile option."
+        echo "Only do this if you know what cross compiling means."
+    fi
+    die "C compiler test failed."
+fi
+
+疑问2：$NDK/sysroot 与$NDK/platform/android-xxx/arch-$ARCH 的sysroot有什么区别
+
+突破：在ndk-r13b编译3.3.9源码通过且能运行，尝试用ndk-r21e 编译ffmpeg3.3.9源码
+-----------------------------------------------------------------------------
+0：（ndk-r13b 编译ffmpeg4.4，源码太新了无法编译）：
+-----------------------------------------------------------------------------
+libavformat/udp.c: In function 'udp_set_multicast_sources':
+libavformat/udp.c:296:28: error: request for member 's_addr' in something not a structure or union
+         mreqs.imr_multiaddr.s_addr = ((struct sockaddr_in *)addr)->sin_addr.s_addr;
+-----------------------------------------------------------------------------
+①（ndk-r21e 编译ffmpeg3.3.9，源码太旧了无法编译）（build_clang.sh）：
+-----------------------------------------------------------------------------
+libavdevice/v4l2.c:135:9: error: assigning to 'int (*)(int, unsigned long, ...)' from incompatible type '<overloaded function type>'
+        SET_WRAPPERS();
+-----------------------------------------------------------------------------
+②（ndk-r17c 编译ffmpeg3.3.9，源码太旧了无法编译）（build_gcc.sh）：
+libavutil/time_internal.h:26:26: error: static declaration of 'gmtime_r' follows non-static declaration
+ static inline struct tm *gmtime_r(const time_t* clock, struct tm *result)
+                          ^
+In file included from libavutil/time_internal.h:22:0,
+                 from libavutil/dict.c:27:
+/home/ztn/android-ndk-r17c/sysroot/usr/include/time.h:75:12: note: previous declaration of 'gmtime_r' was here
+ struct tm* gmtime_r(const time_t* __t, struct tm* __tm);
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+③用ndk-r17c gcc 编译ffmpeg4.4 （build64_gcc）：
+成功编译，但还是用不了
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+④用ndk-r17c gcc 编译ffmpeg4.4 （build64_gcc）（关闭nostdlib）：
+./configure报错
+-----------------------------------------------------------------------------
+Q1:考虑是不是sysroot的原因
+A1:不是
+Q2:会不会是nostdlib的原因
+A2:不是，且nostdlib一定要加上
+
+NEEDED               libswresample.so
+  NEEDED               libavutil.so
+  NEEDED               libm.so
+  NEEDED               libz.so
+  NEEDED               libavfilter.so
+  NEEDED               libavformat.so
+  NEEDED               libavcodec.so
+  NEEDED               libavutil.so
+  NEEDED               libswscale.so
+  NEEDED               libavformat.so
+  NEEDED               libavcodec.so
+  NEEDED               libswresample.so
+  NEEDED               libavutil.so
+  NEEDED               libm.so
+  NEEDED               libavcodec.so
+  NEEDED               libavutil.so
+  NEEDED               libm.so
+  NEEDED               libz.so
+  NEEDED               libm.so
+  NEEDED               libavutil.so
+  NEEDED               libm.so
+  NEEDED               libavutil.so
+  所以额外需要m,z
+尝试将m,z导入 目录（android-ndk-r17c\platforms\android-21\arch-arm64\usr\lib）libm.so libz.so
+但缺少的不是m,z库，而是别人dlopen的库啊。。。
+暂时告一段落，不知所措
+
+move on，在源码中用正则表达式搜lib.*\.so
+默认关闭硬件加速器，所以也不可能是这几个
+写了个脚本(dumpz.sh)
+----------------
+#!/bin/bash
+mkdir funcs
+for f in *.{a,so};
+do
+    objdump -x $f|grep F >funcs/$f.txt;
+done
+for f in funcs/*.txt;
+do
+    grep -r $1  $f;
+done
+----------------
+找$NDK/sysroot/usr/lib/$ARCH-linux-android/ 和 $NDK/platforms/android-21/usr/lib 下的库中的符号
+没有出现__floatunsitf和__paritydi2，更离谱的是ffmpeg4.4源码里也没有这两个函数
+不搞了
+
+最后在网上一搜
+https://github.com/gcc-mirror/gcc/blob/master/libgcc/soft-fp/floatunsitf.c
+发现这玩意是在gcc库里面的，我去，gcc编译器拉一堆屎在别人的项目里？
+路径是android-ndk-r17c/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/lib/gcc/aarch64-linux-android/4.9.x/libgcc.a
+再一找发现__paritydi2也tm在里面
+
+于是我把这一个826K的静态库链接进去，，，
+    不行，因为人家是a库
+    不搞了没时间了
+试试5.0版本
+    竟然只要指定sysroot？的确是这样的。。
+    而且编译通过了，还可以运行!
+回退到4.4版本
+注释库和头文件变量
+我曹，竟然也可以了
+以后看一下configure是怎么对sysroot这个参数进行处理的，太神奇了
+
+其实这次很好地学习了交叉编译的过程，以及深入理解什么是编译
+有空可以好好阅读一下openssl3.0.1的Configure文件是如何通过
+----------------------------------------------------------------
+export ANDROID_NDK_ROOT=/home/ztn/android-ndk-r21e
+PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin:$PATH
+./Configure android-arm64 -D__ANDROID_API__=21
+----------------------------------------------------------------
+这么简单地就完成对库的查找，头文件的查找，其实编译很简单，只要找到工具链，头文件和库
+但复杂起来，头文件也要有sysroot（include <>和""的区别），以及不同架构下的不同库，少一样就可能出现上述bug
+这次失败还有一个原因就是对NDK结构不熟悉，他们写configure脚本的肯定知道每个版本的ndk结构是怎么样的，才能写出脚本
+所以抽空可以看一下这些configure
+cmake，xmake看着高级，其实也在做这些事情，只不过更方便罢了
