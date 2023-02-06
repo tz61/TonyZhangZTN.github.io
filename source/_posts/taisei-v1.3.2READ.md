@@ -1,4 +1,4 @@
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2022-12-25-22-44-34-image.png)
+![](/images/2022-12-25-22-44-34-image.png)
 
 如果直接meson setup build
 

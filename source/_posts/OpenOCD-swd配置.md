@@ -8,23 +8,23 @@ TAP: Test Access Ports
 
 STM32F103C8T6:SW-DP TAP-ID:0x1BA01477
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-18-34-image.png)
+![](/images/2023-01-30-21-18-34-image.png)
 
 STM32F429IGT6:SW-DP TAP-ID: 0x2BA01477
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-34-47-image.png)
+![](/images/2023-01-30-21-34-47-image.png)
 
 F103C8T6:
 
 成功运行后不知道为什么
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-33-57-image.png)
+![](/images/2023-01-30-21-33-57-image.png)
 
 提示的id和之前不一样
 
 F429: 
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-42-02-image.png)
+![](/images/2023-01-30-21-42-02-image.png)
 
 Cannot identify target as a STM32 family
 
@@ -38,9 +38,9 @@ Error: attempted 'gdb' connection rejected
 
 但是用了Clion之后，貌似能烧了？
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-23-02-14-image.png)
+![](/images/2023-01-30-23-02-14-image.png)
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-23-15-01-image.png)
+![](/images/2023-01-30-23-15-01-image.png)
 
 出现0x00000000 貌似是板子无法reset（不是脚本的问题
 
@@ -50,7 +50,7 @@ Error: attempted 'gdb' connection rejected
 
 一个正常的debug(STM32F103):
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-31-18-42-16-image.png)
+![](/images/2023-01-31-18-42-16-image.png)
 
 问题1:
 
@@ -64,7 +64,7 @@ Error: attempted 'gdb' connection rejected
 
 问题3：电源问题
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-31-22-12-06-image.png)
+![](/images/2023-01-31-22-12-06-image.png)
 
 解决方案：在烧录时只接st-link线路
 
@@ -72,7 +72,7 @@ Error: attempted 'gdb' connection rejected
 
 这是插了5v
 
-![](C:\Users\Administrator\AppData\Roaming\marktext\images\2023-02-01-12-20-52-image.png)
+![](/images/2023-02-01-12-20-52-image.png)
 
 貌似时钟配置有问题，卡在0xa0000000
 
