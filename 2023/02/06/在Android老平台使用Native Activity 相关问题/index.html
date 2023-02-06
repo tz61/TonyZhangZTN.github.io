@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>tz61&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在Android老平台使用Native Activity 相关问题Problem1 1234567892023-01-29 15:11:40.477 30209-30209&#x2F;ztn.edu.native052119 E&#x2F;AndroidRuntime: FATAL EXCEPTION: main    Process: ztn.edu.native052119, PID: 30209    java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tz61&#39;s blog">
+<meta property="og:url" content="https://tz61.top/2023/02/06/%E5%9C%A8Android%E8%80%81%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8Native%20Activity%20%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="tz61&#39;s blog">
+<meta property="og:description" content="在Android老平台使用Native Activity 相关问题Problem1 1234567892023-01-29 15:11:40.477 30209-30209&#x2F;ztn.edu.native052119 E&#x2F;AndroidRuntime: FATAL EXCEPTION: main    Process: ztn.edu.native052119, PID: 30209    java">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:modified_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:author" content="TonyZhang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="tz61's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">tz61&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tz61.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-在Android老平台使用Native Activity 相关问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/06/%E5%9C%A8Android%E8%80%81%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8Native%20Activity%20%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2023-02-06T07:36:03.674Z" itemprop="datePublished">2023-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="在Android老平台使用Native-Activity-相关问题"><a href="#在Android老平台使用Native-Activity-相关问题" class="headerlink" title="在Android老平台使用Native Activity 相关问题"></a>在Android老平台使用Native Activity 相关问题</h1><p>Problem1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2023-01-29 15:11:40.477 30209-30209/ztn.edu.native052119 E/AndroidRuntime: FATAL EXCEPTION: main</span><br><span class="line">    Process: ztn.edu.native052119, PID: 30209</span><br><span class="line">    java.lang.RuntimeException: Unable to start activity ComponentInfo&#123;ztn.edu.native052119/android.app.NativeActivity&#125;: java.lang.IllegalArgumentException: Unable to load native library: /data/app/ztn.edu.native052119-1/lib/arm/libmain.so</span><br><span class="line">        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2303)</span><br><span class="line">        at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2363)</span><br><span class="line">        at android.app.ActivityThread.access<span class="variable">$800</span>(ActivityThread.java:147)</span><br><span class="line">        at android.app.ActivityThread<span class="variable">$H</span>.handleMessage(ActivityThread.java</span><br><span class="line">:1283)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>Reference:<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/8828559/loading-3rd-party-shared-libraries-from-an-android-native-activity">Loading 3rd party shared libraries from an Android native activity - Stack Overflow</a></p>
+<p>Solution: 注册一个新的Activity ，并添加main action intent，在该onCreate方法中先调用System.loadLibrary(“assimp”); 然后再启动NativeActivity</p>
+<p>Example: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyNativeActivity</span> <span class="keyword">extends</span> <span class="title class_">Activity</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        System.loadLibrary(<span class="string">&quot;assimp&quot;</span>);</span><br><span class="line">        System.loadLibrary(<span class="string">&quot;main&quot;</span>);</span><br><span class="line">        Log.d(<span class="string">&quot;test&quot;</span>,<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        <span class="type">Intent</span> <span class="variable">intent</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Intent</span>(MyNativeActivity.<span class="built_in">this</span>, android.app.NativeActivity.class);</span><br><span class="line">        MyNativeActivity.<span class="built_in">this</span>.startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AndroidManifest.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;ztn.edu.native052119&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:allowBackup</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:icon</span>=<span class="string">&quot;@mipmap/ic_launcher&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:label</span>=<span class="string">&quot;@string/app_name&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:roundIcon</span>=<span class="string">&quot;@mipmap/ic_launcher_round&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:supportsRtl</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:theme</span>=<span class="string">&quot;@style/AppTheme&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;.MyNativeActivity&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:label</span>=<span class="string">&quot;@string/app_name&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:configChanges</span>=<span class="string">&quot;orientation|keyboardHidden&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.VIEW&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">&quot;android.app.NativeActivity&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:theme</span>=<span class="string">&quot;@android:style/Theme.NoTitleBar.Fullscreen&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:allowBackup</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:icon</span>=<span class="string">&quot;@mipmap/ic_launcher&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:label</span>=<span class="string">&quot;@string/app_name&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:roundIcon</span>=<span class="string">&quot;@mipmap/ic_launcher_round&quot;</span></span></span><br><span class="line"><span class="tag">            &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">meta-data</span> <span class="attr">android:name</span>=<span class="string">&quot;android.app.lib_name&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:value</span>=<span class="string">&quot;main&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>Problem2:</p>
+<p>Shared libraries cannot locate symbol “__register_atfork”</p>
+<p>Reference:</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/android/ndk/issues/964">Shared libraries cannot locate symbol “__register_atfork” · Issue #964 · android&#x2F;ndk · GitHub</a></p>
+<p>Solution:</p>
+<p>不要在老的api机子上用新的api版本的库</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tz61.top/2023/02/06/%E5%9C%A8Android%E8%80%81%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8Native%20Activity%20%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" data-id="cldsi1lj60008gzoyarbs0vme" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/06/taisei%20%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/06/taisei-read/taisei-v1.3.2READ/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/06/Test/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-LC3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-Read/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/WhyGLAD/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 TonyZhang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>tz61&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CMakeFiles.txtsllvm&#x2F;CMakeFiles.txtmodules 在llvm&#x2F;CMakeLists.txt 237行被添加到CMAKE_MODULE_PATH中 123456list(INSERT CMAKE_MODULE_PATH 0  &quot;$&amp;#123;CMAKE_CURRENT_SOURCE_DIR&amp;#125;&#x2F;cmake&quot;  &quot;$&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tz61&#39;s blog">
+<meta property="og:url" content="https://tz61.top/2023/02/06/LLVM15.0.6-Read/index.html">
+<meta property="og:site_name" content="tz61&#39;s blog">
+<meta property="og:description" content="CMakeFiles.txtsllvm&#x2F;CMakeFiles.txtmodules 在llvm&#x2F;CMakeLists.txt 237行被添加到CMAKE_MODULE_PATH中 123456list(INSERT CMAKE_MODULE_PATH 0  &quot;$&amp;#123;CMAKE_CURRENT_SOURCE_DIR&amp;#125;&#x2F;cmake&quot;  &quot;$&amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:modified_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:author" content="TonyZhang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="tz61's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">tz61&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tz61.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LLVM15.0.6-Read" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/06/LLVM15.0.6-Read/" class="article-date">
+  <time class="dt-published" datetime="2023-02-06T07:36:03.674Z" itemprop="datePublished">2023-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="CMakeFiles-txts"><a href="#CMakeFiles-txts" class="headerlink" title="CMakeFiles.txts"></a>CMakeFiles.txts</h1><h2 id="llvm-x2F-CMakeFiles-txt"><a href="#llvm-x2F-CMakeFiles-txt" class="headerlink" title="llvm&#x2F;CMakeFiles.txt"></a>llvm&#x2F;CMakeFiles.txt</h2><p>modules 在<code>llvm/CMakeLists.txt</code> 237行被添加到<code>CMAKE_MODULE_PATH</code>中</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">list</span>(INSERT CMAKE_MODULE_PATH <span class="number">0</span></span><br><span class="line">  <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/cmake&quot;</span></span><br><span class="line">  <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/cmake/modules&quot;</span></span><br><span class="line">  <span class="string">&quot;$&#123;LLVM_COMMON_CMAKE_UTILS&#125;/Modules&quot;</span> <span class="comment">#under llvm-project/cmake/Modules</span></span><br><span class="line">  )</span><br><span class="line"><span class="comment">#注意，这个source_dir是llvm-project/llvm</span></span><br></pre></td></tr></table></figure>
+
+<p>line 267 <code>include(VersionFromVCS)</code>  </p>
+<p>line 308 检测是否为in source build</p>
+<p>line 327 <code>include(GNUInstallPackageDir)</code> </p>
+<p>line 368 <code>LLVM_ALL_TARGETS</code> 为所有targets</p>
+<p>line 623 控制各模块是否编译</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define options to control the inclusion and default build behavior for</span></span><br><span class="line"><span class="comment"># components which may not strictly be necessary (tools, examples, and tests).</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This is primarily to support building smaller or faster project files.</span></span><br></pre></td></tr></table></figure>
+
+<p>line 658 文档生成相关</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">option</span> (LLVM_BUILD_DOCS <span class="string">&quot;Build the llvm documentation.&quot;</span> <span class="keyword">OFF</span>)</span><br><span class="line"><span class="keyword">option</span> (LLVM_INCLUDE_DOCS <span class="string">&quot;Generate build targets for llvm documentation.&quot;</span> <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">option</span> (LLVM_ENABLE_DOXYGEN <span class="string">&quot;Use doxygen to generate llvm API documentation.&quot;</span> <span class="keyword">OFF</span>)</span><br><span class="line"><span class="keyword">option</span> (LLVM_ENABLE_SPHINX <span class="string">&quot;Use Sphinx to generate llvm documentation.&quot;</span> <span class="keyword">OFF</span>)</span><br><span class="line"><span class="keyword">option</span> (LLVM_ENABLE_OCAMLDOC <span class="string">&quot;Build OCaml bindings documentation.&quot;</span> <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">option</span> (LLVM_ENABLE_BINDINGS <span class="string">&quot;Build bindings.&quot;</span> <span class="keyword">ON</span>)</span><br></pre></td></tr></table></figure>
+
+<p>line 776 意思是说在这行之前，所有llvmoptions应该被设置完成了，否则会出现错误</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># All options referred to from HandleLLVMOptions have to be specified</span></span><br><span class="line"><span class="comment"># BEFORE this include, otherwise options will not be correctly set on</span></span><br><span class="line"><span class="comment"># first cmake run</span></span><br><span class="line"><span class="keyword">include</span>(config-ix) <span class="comment">#llvm/cmake/config-ix.cmake 处理头文件查找等工作，以及</span></span><br></pre></td></tr></table></figure>
+
+<p>line 817 <code>include(HandleLLVMOptions)</code>  编译器选项+编译器检查</p>
+<p>line 825 解析各targets并查找有无asmprinter</p>
+<p>line 901~973 tensorflow lib相关</p>
+<p>line 975  输出目录下config.h生成</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Configure the three LLVM configuration header files.</span></span><br><span class="line"><span class="keyword">configure_file</span>(</span><br><span class="line">  <span class="variable">$&#123;LLVM_MAIN_INCLUDE_DIR&#125;</span>/llvm/Config/config.h.cmake<span class="comment">#llvm/include/llvm~</span></span><br><span class="line">  <span class="variable">$&#123;LLVM_INCLUDE_DIR&#125;</span>/llvm/Config/config.h)<span class="comment">#(-B的目录)/include/llvm/~</span></span><br><span class="line"><span class="keyword">configure_file</span>(</span><br><span class="line">  <span class="variable">$&#123;LLVM_MAIN_INCLUDE_DIR&#125;</span>/llvm/Config/llvm-config.h.cmake</span><br><span class="line">  <span class="variable">$&#123;LLVM_INCLUDE_DIR&#125;</span>/llvm/Config/llvm-config.h)</span><br><span class="line"><span class="keyword">configure_file</span>(</span><br><span class="line">  <span class="variable">$&#123;LLVM_MAIN_INCLUDE_DIR&#125;</span>/llvm/Config/abi-breaking.h.cmake</span><br><span class="line">  <span class="variable">$&#123;LLVM_INCLUDE_DIR&#125;</span>/llvm/Config/abi-breaking.h)</span><br></pre></td></tr></table></figure>
+
+<p>line 986~1003 rpm包生成相关</p>
+<p>line 1005~ apple&#x2F;AIX&#x2F;OS390&#x2F;SunOS 等平台 link command，FLAGS调整</p>
+<p>line 1091 </p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(AddLLVM)</span><br><span class="line"><span class="keyword">include</span>(TableGen)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(LLVMDistributionSupport)</span><br></pre></td></tr></table></figure>
+
+<p>line 1107</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(lib/Demangle)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(lib/Support)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(lib/TableGen)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_subdirectory</span>(utils/TableGen)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="keyword">include</span>/llvm)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_subdirectory</span>(lib)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( LLVM_INCLUDE_UTILS )</span><br><span class="line">  <span class="keyword">add_subdirectory</span>(utils/FileCheck)</span><br><span class="line">  <span class="keyword">add_subdirectory</span>(utils/PerfectShuffle)</span><br><span class="line">  <span class="keyword">add_subdirectory</span>(utils/count)</span><br><span class="line">  <span class="keyword">add_subdirectory</span>(utils/<span class="keyword">not</span>)</span><br><span class="line">  <span class="keyword">add_subdirectory</span>(utils/UnicodeData)</span><br><span class="line">  <span class="keyword">add_subdirectory</span>(utils/yaml-bench)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">  <span class="keyword">if</span> ( LLVM_INCLUDE_TESTS )</span><br><span class="line">    <span class="keyword">message</span>(FATAL_ERROR <span class="string">&quot;Including tests when not building utils will not work.</span></span><br><span class="line"><span class="string">    Either set LLVM_INCLUDE_UTILS to On, or set LLVM_INCLUDE_TESTS to Off.&quot;</span>)</span><br><span class="line">  <span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<p>后面是一些测试单元，没必要过多分析</p>
+<p>如下为各module分析</p>
+<h1 id="cmake-Modules"><a href="#cmake-Modules" class="headerlink" title="cmake Modules"></a>cmake Modules</h1><h2 id="preview"><a href="#preview" class="headerlink" title="preview"></a>preview</h2><p>主要的脚本在如下几个文件夹下<br>clang&#x2F;cmake&#x2F;cache<br>clang&#x2F;cmake&#x2F;modules<br>llvm&#x2F;cmake&#x2F;modules</p>
+<h1 id="llvm-x2F-cmake-x2F-modules"><a href="#llvm-x2F-cmake-x2F-modules" class="headerlink" title="llvm&#x2F;cmake&#x2F;modules"></a>llvm&#x2F;cmake&#x2F;modules</h1><h2 id="AddLLVM-cmake"><a href="#AddLLVM-cmake" class="headerlink" title="AddLLVM.cmake"></a>AddLLVM.cmake</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h1 id="clang-x2F-cmake-x2F-modules"><a href="#clang-x2F-cmake-x2F-modules" class="headerlink" title="clang&#x2F;cmake&#x2F;modules"></a>clang&#x2F;cmake&#x2F;modules</h1><h2 id="AddClang-cmake"><a href="#AddClang-cmake" class="headerlink" title="AddClang.cmake"></a>AddClang.cmake</h2><h3 id="add-clang-library"><a href="#add-clang-library" class="headerlink" title="add_clang_library"></a>add_clang_library</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tz61.top/2023/02/06/LLVM15.0.6-Read/" data-id="cldsi1liv0001gzoy9xpo1gx3" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/06/LLVM15.0.6-LC3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/06/Test/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-LC3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-Read/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/WhyGLAD/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 TonyZhang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

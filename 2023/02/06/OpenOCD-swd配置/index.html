@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>tz61&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="objdump -h to check sections in an elf file. DMA: Direct memory access DAP: Debug Access Point TAP: Test Access Ports STM32F103C8T6:SW-DP TAP-ID:0x1BA01477  STM32F429IGT6:SW-DP TAP-ID: 0x2BA01477  F10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tz61&#39;s blog">
+<meta property="og:url" content="https://tz61.top/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="tz61&#39;s blog">
+<meta property="og:description" content="objdump -h to check sections in an elf file. DMA: Direct memory access DAP: Debug Access Point TAP: Test Access Ports STM32F103C8T6:SW-DP TAP-ID:0x1BA01477  STM32F429IGT6:SW-DP TAP-ID: 0x2BA01477  F10">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-18-34-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-34-47-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-33-57-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-42-02-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-23-02-14-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-23-15-01-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-31-18-42-16-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-31-22-12-06-image.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-02-01-12-20-52-image.png">
+<meta property="article:published_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:modified_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:author" content="TonyZhang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-18-34-image.png">
+  
+    <link rel="alternate" href="/atom.xml" title="tz61's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">tz61&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tz61.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-OpenOCD-swd配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2023-02-06T07:36:03.674Z" itemprop="datePublished">2023-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>objdump -h to check sections in an elf file.</p>
+<p>DMA: Direct memory access</p>
+<p>DAP: Debug Access Point</p>
+<p>TAP: Test Access Ports</p>
+<p>STM32F103C8T6:SW-DP TAP-ID:0x1BA01477</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-18-34-image.png"></p>
+<p>STM32F429IGT6:SW-DP TAP-ID: 0x2BA01477</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-34-47-image.png"></p>
+<p>F103C8T6:</p>
+<p>成功运行后不知道为什么</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-33-57-image.png"></p>
+<p>提示的id和之前不一样</p>
+<p>F429: </p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-21-42-02-image.png"></p>
+<p>Cannot identify target as a STM32 family</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Info : device <span class="built_in">id</span> = 0x00000000</span><br><span class="line">Warn : Cannot identify target as a STM32 family.</span><br><span class="line">Error: auto_probe failed</span><br><span class="line">Error: Connect failed. Consider setting up a gdb-attach event <span class="keyword">for</span> the target to prepare target <span class="keyword">for</span> GDB connect, or use <span class="string">&#x27;gdb_memory_map disable&#x27;</span>.</span><br><span class="line">Error: attempted <span class="string">&#x27;gdb&#x27;</span> connection rejected</span><br></pre></td></tr></table></figure>
+
+<p>但是用了Clion之后，貌似能烧了？</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-23-02-14-image.png"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-30-23-15-01-image.png"></p>
+<p>出现0x00000000 貌似是板子无法reset（不是脚本的问题</p>
+<p>真正的原因：Error: ** Unable to reset target **</p>
+<p>解决方案：硬重启，重启电源</p>
+<p>一个正常的debug(STM32F103):</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-31-18-42-16-image.png"></p>
+<p>问题1:</p>
+<p>然而，STM32F429不能halt,</p>
+<p>问题2： chibios项目Reading the memory signature of ChibiOS&#x2F;RT failed</p>
+<p>2.1Reading the memory signature of ChibiOS&#x2F;RT failed</p>
+<p>2.2ChibiOS&#x2F;RT registry check failed, double linked list violation.</p>
+<p>问题3：电源问题</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-01-31-22-12-06-image.png"></p>
+<p>解决方案：在烧录时只接st-link线路</p>
+<p>但是不插5v，就只能从system memory 启动 (pc 在 0x1fff—- 循环)</p>
+<p>这是插了5v</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2023-02-01-12-20-52-image.png"></p>
+<p>貌似时钟配置有问题，卡在0xa0000000</p>
+<p>Can’t find source: Add -g flag to compile options</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tz61.top/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/" data-id="cldsi1liy0002gzoyfmue2x7b" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/06/LLVM15.0.6-Read/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/06/WhyGLAD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/06/Test/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-LC3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-Read/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/WhyGLAD/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 TonyZhang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

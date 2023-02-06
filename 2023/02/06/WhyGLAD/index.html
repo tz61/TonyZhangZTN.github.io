@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>tz61&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Why to use GLAD on windows in order to use OpenGL? Authors suggest there to use GLAD library, because this library provides creation of GL context (which does not fit me)  No, GLAD does not create or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tz61&#39;s blog">
+<meta property="og:url" content="https://tz61.top/2023/02/06/WhyGLAD/index.html">
+<meta property="og:site_name" content="tz61&#39;s blog">
+<meta property="og:description" content="Why to use GLAD on windows in order to use OpenGL? Authors suggest there to use GLAD library, because this library provides creation of GL context (which does not fit me)  No, GLAD does not create or">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:modified_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:author" content="TonyZhang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="tz61's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">tz61&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tz61.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-WhyGLAD" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/06/WhyGLAD/" class="article-date">
+  <time class="dt-published" datetime="2023-02-06T07:36:03.674Z" itemprop="datePublished">2023-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Why-to-use-GLAD-on-windows-in-order-to-use-OpenGL"><a href="#Why-to-use-GLAD-on-windows-in-order-to-use-OpenGL" class="headerlink" title="Why to use GLAD on windows in order to use OpenGL?"></a>Why to use GLAD on windows in order to use OpenGL?</h1><blockquote>
+<p>Authors suggest there to use GLAD library, because this library provides creation of GL context (which does not fit me)</p>
+</blockquote>
+<p>No, GLAD does not create or manage GL contexts in any way, and the website <a target="_blank" rel="noopener" href="https://learnopengl.com/Getting-started/Creating-a-window">https://learnopengl.com/Getting-started/Creating-a-window</a> never claims otherwise. They use GLFW for context and window management.</p>
+<blockquote>
+<p>Does compiler really cannot get addresses of Opengl functions from GL-related .obj files which I specify in Linker Settings of Visual Studio?</p>
+</blockquote>
+<p><strong>No.</strong></p>
+<p>First of all, you do not specify OpenGL-related <code>.obj</code> files for the linker, but on Windows, you might use <code>opengl32.lib</code>, which is the import library file for <code>opengl32.dll</code> which comes with every windows version since Windows 95.</p>
+<p>However, this DLL does not contain the OpenGL implementation you are typically using, but it contains Microsoft’s OpenGL 1.1 GDI software rasterizer. The actual OpenGL implementation on windows is provided by an <em>Installable Client Driver</em> (ICD) which comes with your graphics driver. For OpenGL 1.0 and 1.1 functions, <code>opengl32.dll</code> will act as a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Trampoline_(computing)">trampoline</a> and will forward the calls to the actual ICD DLL.</p>
+<p><strong>If you want to call any OpenGL function beyond OpenGL 1.1</strong> (and that one is from 1997), you have to use the OpenGL extension mechanism in every case, as <strong><code>opengl32.dll</code> does not provide these entry points at all</strong>, and the compiler&#x2F;linker will of course not find them.</p>
+<p>Source: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/55267854/why-use-glad-library-for-opengl-initialization#:~:text=In%20simple%20words%2C%20GLAD%20manages,the%20specific%20graphics%20card%20supports.">c++ - Why use &#39;glad&#39; library for opengl initialization? - Stack Overflow</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tz61.top/2023/02/06/WhyGLAD/" data-id="cldsi1lj10004gzoy5bn8h2p6" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/06/gstreamer%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/06/Test/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-LC3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-Read/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/WhyGLAD/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 TonyZhang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

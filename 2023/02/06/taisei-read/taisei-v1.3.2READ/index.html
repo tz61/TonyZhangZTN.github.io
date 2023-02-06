@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>tz61&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="如果直接meson setup build meson compile -C build 这样全用本地的submodule，会出现链接问题SDL_main unresolved reference meson脚本里写的是如果pkgconfig找不到才会用本地的subprojects(利用wrap下的文件安装的，具体是的check-submodules.py 检查的，具体的项目的构建树以后再去看，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tz61&#39;s blog">
+<meta property="og:url" content="https://tz61.top/2023/02/06/taisei-read/taisei-v1.3.2READ/index.html">
+<meta property="og:site_name" content="tz61&#39;s blog">
+<meta property="og:description" content="如果直接meson setup build meson compile -C build 这样全用本地的submodule，会出现链接问题SDL_main unresolved reference meson脚本里写的是如果pkgconfig找不到才会用本地的subprojects(利用wrap下的文件安装的，具体是的check-submodules.py 检查的，具体的项目的构建树以后再去看，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2022-12-25-22-44-34-image.png">
+<meta property="article:published_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:modified_time" content="2023-02-06T07:36:03.674Z">
+<meta property="article:author" content="TonyZhang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\Administrator\AppData\Roaming\marktext\images\2022-12-25-22-44-34-image.png">
+  
+    <link rel="alternate" href="/atom.xml" title="tz61's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">tz61&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://tz61.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-taisei-read/taisei-v1.3.2READ" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/06/taisei-read/taisei-v1.3.2READ/" class="article-date">
+  <time class="dt-published" datetime="2023-02-06T07:36:03.674Z" itemprop="datePublished">2023-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2022-12-25-22-44-34-image.png"></p>
+<p>如果直接meson setup build</p>
+<p>meson compile -C build</p>
+<p>这样全用本地的submodule，会出现链接问题SDL_main unresolved reference</p>
+<p>meson脚本里写的是如果pkgconfig找不到才会用本地的subprojects(利用wrap下的文件安装的，具体是的<code>check-submodules.py</code> 检查的，具体的项目的构建树以后再去看，脚本太多了)</p>
+<p>然后用pacman -S 安装SDL2后就不报错了，但是不能运行（打开后闪退，没有原因</p>
+<p>然后我把所有依赖用pacman装了才能运行</p>
+<p>具体以后再探究</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tz61.top/2023/02/06/taisei-read/taisei-v1.3.2READ/" data-id="cldsi1lj70009gzoy20495lpt" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/06/%E5%9C%A8Android%E8%80%81%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8Native%20Activity%20%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/06/Test/">Test</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-LC3/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/LLVM15.0.6-Read/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/OpenOCD-swd%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/06/WhyGLAD/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 TonyZhang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
